@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[AsContentElement(GamePlanController::TYPE, category: 'includes')]
+#[AsContentElement(GamePlanController::TYPE, category: 'nuliga-hessen')]
 class GamePlanController extends AbstractContentElementController
 {
     public const string TYPE = 'game_plan';

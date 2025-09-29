@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[AsContentElement(ResultTableController::TYPE, category: 'includes')]
+#[AsContentElement(ResultTableController::TYPE, category: 'nuliga-hessen')]
 class ResultTableController extends AbstractContentElementController
 {
     public const string TYPE = 'result_table';
