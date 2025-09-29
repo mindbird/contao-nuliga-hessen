@@ -7,6 +7,7 @@ namespace Mindbird\ContaoNuligaHessen\Controller\ContentElement;
 use Contao\BackendTemplate;
 use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
 use Contao\CoreBundle\Routing\ScopeMatcher;
 use Contao\CoreBundle\Twig\FragmentTemplate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[AsContentElement(ResultTableController::TYPE, category: 'includes')]
 class ResultTableController extends AbstractContentElementController
 {
     public const string TYPE = 'result_table';
