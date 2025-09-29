@@ -1,0 +1,31 @@
+{
+  "name": "mindbird/contao-nuliga-hessen",
+  "type": "contao-bundle",
+  "description": "Contao Bundle for NuLiga Hessen access.",
+  "keywords": ["contao", "nuliga", "hessen", "handball", "sport"],
+  "license": "LGPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Mindbird",
+      "email": "info@mindbird.de",
+      "homepage": "https://www.mindbird.de"
+    }
+  ],
+  "require": {
+    "contao/core-bundle": "^4.13 || ^5.0"
+  },
+  "conflict": {
+    "contao/manager-plugin": "<2.0 || >=3.0"
+  },
+  "require-dev": {
+    "contao/manager-plugin": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mindbird\\ContaoNuligaHessen\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Mindbird\\ContaoNuligaHessen\\ContaoManager\\Plugin"
+  }
+}
