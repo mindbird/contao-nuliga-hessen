@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Mindbird\ContaoNuligaHessen\Controller\:
+    public: true
+    resource: ../src/Controller
+    tags: ['controller.service_arguments']
+
+  Mindbird\ContaoNuligaHessen\:
+    public: true
+    resource: ../src

@@ -12,6 +12,8 @@ class ContaoNuligaHessenExtension extends Extension
 
     public function load(array $configs, ContainerBuilder $container)
     {
-        new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'))->load('config.yaml');
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
+        $loader->load('config.yaml');
+        $loader->load('services.yaml');
     }
 }
