@@ -6,29 +6,29 @@
     {% else %}
         <table>
             <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Heimmannschaft</th>
-                    <th>Gastmannschaft</th>
-                    <th>Ergebnis</th>
-                </tr>
+            <tr>
+                <th>Datum</th>
+                <th>Heimmannschaft</th>
+                <th>Gastmannschaft</th>
+                <th>Ergebnis</th>
+            </tr>
             </thead>
             <tbody>
-                {% for game in meetings.meetingAbbr %}
-                    {% if game.teamHomeClubNr == clubId or game.teamGuestClubNr == clubId %}
-                        <tr>
-                            <td>{{ game.scheduled|date('D d.m.Y H:i') }}</td>
-                            <td>{{ game.teamHome }}</td>
-                            <td>{{ game.teamGuest }}</td>
-                            <td>{% if (game.resultsAvailable) %}{{ game.matchesHome }}:{{ game.matchesGuest }} ({{ game.doubleMatchesHome }}:{{ game.doubleMatchesGuest }}){% endif %}</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td colspan="2">{{ game.courtHallName }}, {{ game.location.city }}</td>
-                            <td>{% if publishPdfEnabled == true %}<a href="{{ game.pdfUrl }}" target="_blank">Spielbericht</a>{% endif %}</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
+            {% for game in data.meetings.meetingAbbr %}
+                {% if game.teamHomeClubNr == clubId or game.teamGuestClubNr == clubId %}
+                    <tr>
+                        <td>{{ game.scheduled|date('D d.m.Y H:i') }}</td>
+                        <td>{{ game.teamHome }}</td>
+                        <td>{{ game.teamGuest }}</td>
+                        <td>{% if (game.resultsAvailable) %}{{ game.matchesHome }}:{{ game.matchesGuest }} ({{ game.doubleMatchesHome }}:{{ game.doubleMatchesGuest }}){% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">{{ game.courtHallName }}, {{ game.location.city }}</td>
+                        <td>{% if game.publishPdfEnabled == true and game.pdfUrl != '' %}<a href="{{ game.pdfUrl }}" target="_blank">Spielbericht</a>{% endif %}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
