@@ -40,6 +40,7 @@ class GamePlanController extends AbstractContentElementController
 
         if (!file_exists(__DIR__ . '/../../../json/' . $model->nuliga_hessen_group_id . '.json')) {
             $template->noData = true;
+            return $template->getResponse();
         }
 
         $data = file_get_contents(__DIR__ . '/../../../json/' . $model->nuliga_hessen_group_id . '.json');
