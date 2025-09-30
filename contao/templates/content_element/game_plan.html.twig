@@ -14,19 +14,22 @@
             </tr>
             </thead>
             <tbody>
+            {% set games = 1 %}
             {% for game in data.meetings.meetingAbbr %}
                 {% if game.teamHomeClubNr == clubId or game.teamGuestClubNr == clubId %}
-                    <tr>
+                    <tr class="{% if games is odd %}odd{% else %}even{% endif %}">
+
                         <td>{{ getGermanWeekday(game.scheduled | date('D')) }} {{ game.scheduled | date('d.m.Y H:i') }}</td>
                         <td>{{ game.teamHome }}</td>
                         <td>{{ game.teamGuest }}</td>
                         <td>{% if (game.resultsAvailable) %}{{ game.matchesHome }}:{{ game.matchesGuest }} ({{ game.doubleMatchesHome }}:{{ game.doubleMatchesGuest }}){% endif %}</td>
                     </tr>
-                    <tr>
+                    <tr class="{% if games is odd %}odd{% else %}even{% endif %}">
                         <td></td>
                         <td colspan="2">{{ game.courtHallName }}, {{ game.location.city }}</td>
                         <td>{% if game.publishPdfEnabled == true and game.pdfUrl != '' %}<a href="{{ game.pdfUrl }}" target="_blank">Spielbericht</a>{% endif %}</td>
                     </tr>
+                    {% set games = games + 1 %}
                 {% endif %}
             {% endfor %}
             </tbody>
