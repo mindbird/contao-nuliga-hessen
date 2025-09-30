@@ -17,10 +17,15 @@
                 {% for game in meetings.meetingAbbr %}
                     {% if game.teamHomeClubNr == clubId OR game.teamGuestClubNr == clubId %}
                         <tr>
-                            <td>{{ game.scheduled }}</td>
+                            <td>{{ game.scheduled|date(D d.m.Y H:i) }}</td>
                             <td>{{ game.teamHome }}</td>
                             <td>{{ game.teamGuest }}</td>
-                            <td>{{ game.matchesHome }}:{{ game.matchesGuest }} ({{ game.doubleMatchesHome }}:{{ game.doubleMatchesGuest }})</td>
+                            <td>{% if (game.resultsAvailable) %}{{ game.matchesHome }}:{{ game.matchesGuest }} ({{ game.doubleMatchesHome }}:{{ game.doubleMatchesGuest }}){% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="2">{{ game.courtHallName }}, {{ game.location.city }}</td>
+                            <td>{% if publishPdfEnabled == true %}<a href="{{ game.pdfUrl }}" target="_blank">Spielbericht</a>{% endif %}</td>
                         </tr>
                     {% endif %}
                 {% endfor %}
