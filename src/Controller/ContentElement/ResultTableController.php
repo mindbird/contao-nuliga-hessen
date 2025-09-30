@@ -20,7 +20,7 @@ class ResultTableController extends AbstractContentElementController
 {
     public const string TYPE = 'result_table';
 
-    public function __construct(private readonly ScopeMatcher $scopeMatcher)
+    public function __construct(private readonly ScopeMatcher $scopeMatcher, private readonly string $nuligaClubId)
     {
     }
 
@@ -32,6 +32,19 @@ class ResultTableController extends AbstractContentElementController
 
             return $template->getResponse();
         }
-        // TODO: Implement getResponse() method.
+
+        if ('' === $model->nuliga_hessen_group_id) {
+            throw new \RuntimeException('No NuLiga Hessen Group ID set.');
+        }
+
+        if (!file_exists(__DIR__ . '/../../../json/' . $model->nuliga_hessen_group_id . '.json')) {
+            $template->noData = true;
+        }
+
+        $data = file_get_contents(__DIR__ . '/../../../json/' . $model->nuliga_hessen_group_id . '.json');
+        $template->data = json_decode($data, true);
+        $template->clubId = $this->nuligaClubId;
+
+        return $template->getResponse();
     }
 }

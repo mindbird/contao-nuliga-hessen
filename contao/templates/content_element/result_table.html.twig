@@ -1,0 +1,38 @@
+{% extends "@Contao/content_element/_base.html.twig" %}
+
+{% block content %}
+    {% if noData == true %}
+        <p>Bisher liegen noch keine aktuellen Daten vor.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Rang</th>
+                    <th>Mannschaft</th>
+                    <th>Spiele</th>
+                    <th>S</th>
+                    <th>U</th>
+                    <th>N</th>
+                    <th>Tore</th>
+                    <th>Diff</th>
+                    <th>Punkte</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in groupTable.groupTableTeam %}
+                    <tr class="{% if team.clubNr == clubId %}home{% endif %}">
+                        <td>{{ team.tableRank }}</td>
+                        <td>{{ team.name }}</td>
+                        <td>{{ team.meetings }}</td>
+                        <td>{{ team.ownMeetings }}</td>
+                        <td>{{ team.tieMeetings }}</td>
+                        <td>{{ team.otherMeetings }}</td>
+                        <td>{{ team.ownMatches }}:{{ team.otherMatches }}</td>
+                        <td>{{ team.ownMatches - team.otherMatches }}</td>
+                        <td>{{ team.ownPoints }}:{{ team.otherPoints }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

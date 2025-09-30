@@ -1,0 +1,30 @@
+{% extends "@Contao/content_element/_base.html.twig" %}
+
+{% block content %}
+    {% if noData == true %}
+        <p>Bisher liegen noch keine aktuellen Daten vor.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Heimmannschaft</th>
+                    <th>Gastmannschaft</th>
+                    <th>Ergebnis</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for game in meetings.meetingAbbr %}
+                    {% if game.teamHomeClubNr == clubId OR game.teamGuestClubNr == clubId %}
+                        <tr>
+                            <td>{{ game.scheduled }}</td>
+                            <td>{{ game.teamHome }}</td>
+                            <td>{{ game.teamGuest }}</td>
+                            <td>{{ game.matchesHome }}:{{ game.matchesGuest }} ({{ game.doubleMatchesHome }}:{{ game.doubleMatchesGuest }})</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
