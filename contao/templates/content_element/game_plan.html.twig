@@ -17,7 +17,7 @@
             {% for game in data.meetings.meetingAbbr %}
                 {% if game.teamHomeClubNr == clubId or game.teamGuestClubNr == clubId %}
                     <tr>
-                        <td>{{ game.scheduled|date('D d.m.Y H:i') }}</td>
+                        <td>{{ getGermanWeekday(game.scheduled | date('D')) }} {{ game.scheduled | date('d.m.Y H:i') }}</td>
                         <td>{{ game.teamHome }}</td>
                         <td>{{ game.teamGuest }}</td>
                         <td>{% if (game.resultsAvailable) %}{{ game.matchesHome }}:{{ game.matchesGuest }} ({{ game.doubleMatchesHome }}:{{ game.doubleMatchesGuest }}){% endif %}</td>
