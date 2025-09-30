@@ -38,6 +38,7 @@ class GamePlanController extends AbstractContentElementController
             throw new \RuntimeException('No NuLiga Hessen Group ID set.');
         }
 
+        $template->noData = false;
         if (!file_exists(__DIR__ . '/../../../json/' . $model->nuliga_hessen_group_id . '.json')) {
             $template->noData = true;
             return $template->getResponse();
