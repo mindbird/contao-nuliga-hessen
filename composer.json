@@ -12,7 +12,8 @@
     }
   ],
   "require": {
-    "contao/core-bundle": "^4.13 || ^5.0"
+    "contao/core-bundle": "^4.13 || ^5.0",
+    "symfony/http-client": "^7.3"
   },
   "conflict": {
     "contao/manager-plugin": "<2.0 || >=3.0"
@@ -27,5 +28,12 @@
   },
   "extra": {
     "contao-manager-plugin": "Mindbird\\ContaoNuligaHessen\\ContaoManager\\Plugin"
+  },
+  "config": {
+    "allow-plugins": {
+      "contao-components/installer": true,
+      "php-http/discovery": true,
+      "contao/manager-plugin": true
+    }
   }
 }

@@ -3,6 +3,9 @@ services:
     autowire: true
     autoconfigure: true
     public: true
+    bind:
+      $nuligaApiToken: mindbird.contao.nuliga_hessen.token
+      $nuligaClubId: mindbird.contao.nuliga_hessen.club_id
 
   Mindbird\ContaoNuligaHessen\:
     resource: '../src/'

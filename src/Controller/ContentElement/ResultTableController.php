@@ -28,7 +28,7 @@ class ResultTableController extends AbstractContentElementController
     {
         if ($this->scopeMatcher->isBackendRequest($request)) {
             $template = new BackendTemplate('be_wildcard');
-            $template->title = 'Result Table'; //@TODO add translation and name of group
+            $template->title = 'Tabelle für Gruppe ' . $model->nuliga_hessen_group_id;
 
             return $template->getResponse();
         }

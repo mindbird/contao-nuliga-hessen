@@ -28,7 +28,7 @@ class GamePlanController extends AbstractContentElementController
     {
         if ($this->scopeMatcher->isBackendRequest($request)) {
             $template = new BackendTemplate('be_wildcard');
-            $template->title = 'Game Plan'; //@TODO add translation and name of group
+            $template->title = 'Spielplan für Gruppe ' . $model->nuliga_hessen_group_id;
             $template->headline = $model->headline;
 
             return $template->getResponse();
