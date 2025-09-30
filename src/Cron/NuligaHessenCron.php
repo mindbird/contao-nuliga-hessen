@@ -15,14 +15,12 @@ class NuligaHessenCron
 
     public function __invoke(string $scope): PromiseInterface
     {
-
         if (Cron::SCOPE_WEB === $scope) {
             throw new CronExecutionSkippedException();
         }
 
-
         return $this->processUtil->createPromise(
-            $this->processUtil->createSymfonyConsoleProcess('hessen-nuliga:update')
+            $this->processUtil->createSymfonyConsoleProcess('nuliga-hessen:update')
         );
     }
 
