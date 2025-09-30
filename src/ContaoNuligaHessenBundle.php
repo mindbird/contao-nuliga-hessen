@@ -10,7 +10,6 @@ class ContaoNuligaHessenBundle extends AbstractBundle
 {
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        $container->import('../config/config.yaml');
         $container->import('../config/services.yaml');
     }
 }

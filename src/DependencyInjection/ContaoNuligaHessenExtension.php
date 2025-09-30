@@ -14,6 +14,5 @@ class ContaoNuligaHessenExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('config.yaml');
-        $loader->load('services.yaml');
     }
 }
