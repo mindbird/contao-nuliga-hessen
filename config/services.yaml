@@ -4,8 +4,8 @@ services:
     autoconfigure: true
     public: true
     bind:
-      $nuligaApiToken: mindbird.contao.nuliga_hessen.token
-      $nuligaClubId: mindbird.contao.nuliga_hessen.club_id
+      $nuligaApiToken: '%env(NULIGA_API_TOKEN)%'
+      $nuligaClubId: '%env(NULIGA_CLUB_ID)%'
 
   Mindbird\ContaoNuligaHessen\:
     resource: '../src/'

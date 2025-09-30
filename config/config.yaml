@@ -1,5 +1,0 @@
-mindbird:
-  contao:
-    nuliga_hessen:
-      token: '%env(NULIGA_API_TOKEN)%'
-      club_id: '%env(NULIGA_CLUB_ID)%'

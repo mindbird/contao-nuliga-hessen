@@ -27,13 +27,13 @@ class NuligaHessenUpdateCommand extends Command
          * Save data to... wherever
          */
         $groupIds = $this->nuligaHessenService->getUsedGroupIds();
-        foreach ($groupIds as $groupId) {
-            $symfonyStyle->writeln('Working on group ID: ' . $groupId['group_id']);
+        foreach ($groupIds as $data) {
+            $symfonyStyle->writeln('Working on group ID: ' . $data['group_id']);
             try {
-                $data = $this->nuligaHessenService->fetchGroupDataFromApi($groupId);
-                $symfonyStyle->success('Successfully updated group ID: ' . $groupId['group_id']);
+                $response = $this->nuligaHessenService->fetchGroupDataFromApi($data['group_id']);
+                $symfonyStyle->success('Successfully updated group ID: ' . $data['group_id']);
             } catch (\Exception $e) {
-                $symfonyStyle->error('Error updating group ID ' . $groupId['group_id'] . ': ' . $e->getMessage());
+                $symfonyStyle->error('Error updating group ID ' . $data['group_id'] . ': ' . $e->getMessage());
             }
         }
         return Command::SUCCESS;
