@@ -20,7 +20,7 @@ class NuligaHessenService
         return $result->fetchAllAssociative();
     }
 
-    public function fetchGroupDataFromApi(int $groupId): array
+    public function fetchGroupDataFromApi(int $groupId): string
     {
         $url = 'https://rs.handball.app/api.php/v1/federation/hhv/club/' . $this->nuligaClubId . '/group/' . $groupId;
         $response = $this->client->request('GET', $url, [
@@ -30,7 +30,7 @@ class NuligaHessenService
             throw new \RuntimeException('Failed to fetch data from NuLiga API for group ID ' . $groupId);
         }
 
-        return $response->toArray();
+        return $response->getContent();
     }
 
 }
