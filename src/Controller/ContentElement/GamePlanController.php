@@ -10,17 +10,16 @@ use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController
 use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
 use Contao\CoreBundle\Routing\ScopeMatcher;
 use Contao\CoreBundle\Twig\FragmentTemplate;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Mindbird\ContaoNuligaHessen\Service\NuligaHessenService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 
 #[AsContentElement(GamePlanController::TYPE, category: 'nuliga-hessen')]
 class GamePlanController extends AbstractContentElementController
 {
     public const string TYPE = 'game_plan';
 
-    public function __construct(private readonly ScopeMatcher $scopeMatcher, private readonly string $nuligaClubId)
+    public function __construct(private readonly ScopeMatcher $scopeMatcher, private readonly string $nuligaClubId, private readonly NuligaHessenService $nuligaHessenService)
     {
     }
 
@@ -38,15 +37,13 @@ class GamePlanController extends AbstractContentElementController
             throw new \RuntimeException('No NuLiga Hessen Group ID set.');
         }
 
-        $template->noData = false;
-        if (!file_exists(__DIR__ . '/../../../json/' . $model->nuliga_hessen_group_id . '.json')) {
-            $template->noData = true;
-            return $template->getResponse();
-        }
-
-        $data = file_get_contents(__DIR__ . '/../../../json/' . $model->nuliga_hessen_group_id . '.json');
-        $template->data = json_decode($data, true);
         $template->clubId = $this->nuligaClubId;
+        $template->noData = false;
+        try {
+            $template->data = $this->nuligaHessenService->fetchGroupData($model->nuliga_hessen_group_id);
+        } catch (\Exception) {
+            $template->noData = true;
+        }
 
         return $template->getResponse();
     }

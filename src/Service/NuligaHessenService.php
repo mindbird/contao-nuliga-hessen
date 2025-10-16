@@ -3,11 +3,13 @@
 namespace Mindbird\ContaoNuligaHessen\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class NuligaHessenService
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly HttpClientInterface $client, private readonly string $nuligaApiToken, private readonly string $nuligaClubId)
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly HttpClientInterface $client, private readonly CacheInterface $appCache, private readonly string $nuligaApiToken, private readonly string $nuligaClubId)
     {
 
     }
@@ -31,6 +33,16 @@ class NuligaHessenService
         }
 
         return $response->getContent();
+    }
+
+    public function fetchGroupData(int $groupId): string
+    {
+        $this->appCache->withSubNamespace('nuliga-hessen');
+        return $this->appCache->get('group-' . $groupId, function(ItemInterface $item) use ($groupId) {
+            $item->expiresAfter(60*10); // Cache for 10 minutes
+            return json_decode($this->fetchGroupDataFromApi($groupId), true);
+        });
+
     }
 
 }
