@@ -35,14 +35,12 @@ class NuligaHessenService
         return $response->getContent();
     }
 
-    public function fetchGroupData(int $groupId): string
+    public function fetchGroupData(string $groupId): array
     {
         $this->appCache->withSubNamespace('nuliga-hessen');
         return $this->appCache->get('group-' . $groupId, function(ItemInterface $item) use ($groupId) {
             $item->expiresAfter(60*10); // Cache for 10 minutes
             return json_decode($this->fetchGroupDataFromApi($groupId), true);
         });
-
     }
-
 }
